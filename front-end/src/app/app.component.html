@@ -1,0 +1,40 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand">Todo App</a>
+</nav>
+<div class="container mt-4">
+    <h3>Todos</h3>
+    <hr />
+    <form [formGroup]="form" (ngSubmit)="submit()" >
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" formControlName="description" />
+            </div>
+            <div class="col-md-1">
+                <button type="submit" [disabled]="!form.get('description').valid" 
+                        class="btn btn-primary">Add
+                </button>
+            </div>
+        </div>
+    </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-7">
+            <ul class="list-group">
+                <li *ngFor="let todo of todos" 
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="{{ todo.done ? 'done' : '' }}">
+                        {{ todo.description }} {{ todo.doneDate }}
+                    </span>
+                    <div class="btn-group">
+                        <button class="btn btn-success" 
+                                [disabled]="todo.done" 
+                                (click)="done(todo)">
+                            Done
+                        </button>
+                        <button class="btn btn-danger" (click)="delete(todo)" >Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
